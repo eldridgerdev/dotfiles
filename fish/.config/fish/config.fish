@@ -30,12 +30,10 @@ set -Ux EDITOR nvim
 set -Ux MY_CERTIFICATES ~/code
 set -Ux NODE_EXTRA_CA_CERTS $MY_CERTIFICATES/nscacert_combined.pem
 set -Ux SKIP_PREFLIGHT_CHECK true
-set -Ux BASH_SOURCE /Users/ryan_eldridge/code/stanson-frontend/apps/backoffice
-
 set -Ux FZF_DEFAULT_COMMAND ag --nocolor --ignore node_modules -g ""
 
 # uv
-fish_add_path "/Users/ryan_eldridge/.local/bin"
+fish_add_path "$HOME/.local/bin"
 
 # zoxide
 set -Ux _ZO_ECHO 1

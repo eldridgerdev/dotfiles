@@ -13,7 +13,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/Users/ryan_eldridge/.claude/hooks/diff-review.sh",
+            "command": "$HOME/.claude/hooks/diff-review.sh",
             "timeout": 600
           }
         ]

@@ -8,3 +8,6 @@ gh/.config/gh/hosts.yml
 
 # Local overrides
 *.local
+
+# Fish auto-generated files
+fish/.config/fish/fish_variables
