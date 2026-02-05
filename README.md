@@ -151,11 +151,15 @@ Tmux will use the config at `~/.config/tmux/tmux.conf`. The configuration includ
 | `C-s H/J/K/L` | Resize panes |
 | `C-s r` | Reload config |
 
-**Optional: Install TPM (Tmux Plugin Manager)**
+**Install TPM (Tmux Plugin Manager)**
+
+TPM is required for the tmux configuration. Without it, you'll see error 127 on startup.
 
 ```bash
 git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
 ```
+
+Then launch tmux and press `prefix + I` (that's `C-s I`) to install plugins.
 
 ## Removing a Package
 

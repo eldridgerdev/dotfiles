@@ -96,6 +96,9 @@ keybindings:
     - key: C
       command: >
         zellij run -f --cwd {{.RepoPath}} -- "sh -c 'git stash -u && gh pr checkout {{.PrNumber}} && nvim .'"
+    - key: n
+      command: >
+        cd {{.RepoPath}} && nvim -c "Octo pr edit {{.PrNumber}}"
     - key: "#"
       command: >
         echo -n "{{.PrNumber}}" | pbcopy
@@ -117,6 +120,9 @@ keybindings:
     - key: "#"
       command: >
         echo -n "{{.IssueNumber}}" | pbcopy
+    - key: n
+      command: >
+        cd {{.RepoPath}} && nvim -c "Octo issue edit {{.IssueNumber}}"
     - key: e
       command: >
         cd {{.RepoPath}} && gh issue edit {{.IssueNumber}}
