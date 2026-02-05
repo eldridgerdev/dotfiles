@@ -13,6 +13,7 @@ My dotfiles managed with [GNU Stow](https://www.gnu.org/software/stow/).
 - `gh` - GitHub CLI configuration
 - `gh-dash` - GitHub CLI dashboard
 - `ccstatusline` - Claude Code status line configuration
+- `claude` - Claude Code settings, hooks, and scripts
 
 ## Setup
 
@@ -89,7 +90,7 @@ curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install 
 
 ```bash
 cd ~/dotfiles
-stow fish starship ghostty nvim wezterm tmux gh gh-dash ccstatusline
+stow fish starship ghostty nvim wezterm tmux gh gh-dash ccstatusline claude
 ```
 
 Or stow individual packages:
@@ -161,6 +162,17 @@ git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
 ```bash
 stow -D fish
 ```
+
+## Claude Code
+
+The `claude` package contains Claude Code configuration:
+
+- `settings.json` - Global settings including model preferences, hooks, and permissions
+- `CLAUDE.md` - Global instructions loaded into every Claude Code session
+- `hooks/diff-review.sh` - Pre-tool hook for reviewing file edits
+- `scripts/` - Helper scripts for Claude Code workflows
+
+After stowing, files are symlinked to `~/.claude/`.
 
 ## Claude Code Status Line
 
