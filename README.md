@@ -174,6 +174,22 @@ The `claude` package contains Claude Code configuration:
 
 After stowing, files are symlinked to `~/.claude/`.
 
+Stow only creates symlinks for files in this package. Your existing `~/.claude/` content (agents, plugins, projects, cache, etc.) remains untouched.
+
+**Handling conflicts:** If you already have `settings.json` or `CLAUDE.md` in `~/.claude/`, stow will report a conflict. Back up or remove the existing files first:
+
+```bash
+mv ~/.claude/settings.json ~/.claude/settings.json.bak
+mv ~/.claude/CLAUDE.md ~/.claude/CLAUDE.md.bak
+stow claude
+```
+
+Preview what stow will do without making changes:
+
+```bash
+stow -n -v claude
+```
+
 ## Claude Code Status Line
 
 The `ccstatusline` package contains a custom status line configuration for Claude Code showing model, context length, git branch, and git changes.
