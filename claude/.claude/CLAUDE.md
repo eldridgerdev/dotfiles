@@ -22,4 +22,43 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ```
 
-This is especially important when the default shell is fish, as `BASH_SOURCE` can behave unexpectedly when bash scripts are invoked through different shell contexts.
+This is especially important when the default shell is fish, as `BASH_SOURCE`
+can behave unexpectedly when bash scripts are invoked through different shell
+contexts.
+
+## Markdown File Formatting
+
+When writing or editing `.md` files, follow these formatting rules:
+
+### Spacing Rules
+
+- Add a blank line after every heading (`#`, `##`, `###`, etc.)
+- Add a blank line before and after code blocks (```)
+- Add a blank line before and after lists (both ordered and unordered)
+- Add a blank line before and after block quotes
+
+### Line Length
+
+- Keep lines under 80 characters
+- Wrap long paragraphs and list items to multiple lines
+- Exception: URLs, code blocks, and tables may exceed 80 characters
+
+### Code Blocks
+
+- Always specify a language for syntax highlighting (e.g., ```typescript)
+- Use ```text for plain text content like file trees or terminal output
+- Use ```bash for shell commands
+
+### Lists
+
+- Use `-` for unordered lists (not `*`)
+- Use `1.` for ordered lists
+- Indent nested list items with 3 spaces
+- For multi-line list items, indent continuation lines to align with the text
+
+### Other Rules
+
+- No trailing whitespace at end of lines
+- Single blank line at end of file
+- No multiple consecutive blank lines
+- Use ATX-style headings (`#`) not Setext-style (underlines)

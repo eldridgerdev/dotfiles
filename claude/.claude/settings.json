@@ -1,9 +1,6 @@
 {
   "permissions": {
-    "allow": [
-      "Edit",
-      "Write"
-    ]
+    "allow": ["Edit", "Write"]
   },
   "model": "opus",
   "hooks": {
@@ -25,7 +22,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "echo ${PWD##*/} | xargs say claude needs your input in"
+            "command": "say claude needs your input"
           },
           {
             "type": "command",
@@ -40,7 +37,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "echo ${PWD##*/} | xargs say claude has results for you in"
+            "command": "say claude has completed a task"
           },
           {
             "type": "command",
