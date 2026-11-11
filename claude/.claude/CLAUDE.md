@@ -1,64 +1,57 @@
 # Global Claude Code Settings
 
-## Manual Command Execution
+Applies to every project. A project's own `CLAUDE.md` wins where they differ.
 
-When you need to tell me to run a command manually (e.g., due to safety restrictions), always ask if I want you to open a new tmux pane in the current directory first. Use:
+## Models and subagents
 
-```bash
-tmux split-window -h -c "#{pane_current_path}"
-```
+- Keep a session on one model. The prompt cache is per model, so switching
+  mid-session re-reads the whole context uncached.
+- Pass `model` on every Agent call; an omitted `model` inherits the session's,
+  which may be the most expensive one. Use the cheapest tier that fits:
+   - `haiku`: searching, lookups, running checks and reading their output,
+     summarizing a file or diff.
+   - `sonnet`: implementing a change that is already decided, tests for a
+     stated behavior, doc updates.
+   - `opus`: design, planning, investigation, bugs with an unknown cause.
+   - `fable`: only when I ask.
+- Delegate when only the conclusion matters and the path to it is noisy
+  (broad searches, test and CI logs), or when the work is self-contained and
+  fits a short brief. Do small edits and anything that depends on our
+  conversation inline: a subagent starts cold and re-reading costs more.
+- A brief names the files, the decision already made, the acceptance check,
+  and what to return (a few lines, not a transcript). Run independent agents
+  in one message so they go in parallel.
+- Prefer a project's own agents (`.claude/agents/`) over generic ones.
 
-Then provide the command for me to run in that pane.
+## Shell
 
-## Bash Script Path Resolution
+- My login shell is fish; Bash tool commands run in bash.
+- `rtk` rewrites most shell commands through a hook to shorten their output.
+  If output looks truncated or wrong, re-run it as `rtk proxy <command>`.
+- When I have to run a command myself (for example, a safety restriction),
+  first ask whether to open a tmux pane in the current directory, then give
+  me the command to run there:
 
-When writing or fixing bash scripts that need to reference files relative to the script's location, use `$0` instead of `${BASH_SOURCE[0]}` for directory detection:
+  ```bash
+  tmux split-window -h -c "#{pane_current_path}"
+  ```
 
-```bash
-# Reliable - works when invoked from fish shell or other contexts
-SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+- In bash scripts that locate files relative to themselves, use `$0`, not
+  `${BASH_SOURCE[0]}`, which misresolves when invoked from fish:
 
-# Unreliable - BASH_SOURCE may not resolve correctly in all contexts
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-```
+  ```bash
+  SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+  ```
 
-This is especially important when the default shell is fish, as `BASH_SOURCE`
-can behave unexpectedly when bash scripts are invoked through different shell
-contexts.
+## Markdown files
 
-## Markdown File Formatting
+When writing or editing `.md` files:
 
-When writing or editing `.md` files, follow these formatting rules:
-
-### Spacing Rules
-
-- Add a blank line after every heading (`#`, `##`, `###`, etc.)
-- Add a blank line before and after code blocks (```)
-- Add a blank line before and after lists (both ordered and unordered)
-- Add a blank line before and after block quotes
-
-### Line Length
-
-- Keep lines under 80 characters
-- Wrap long paragraphs and list items to multiple lines
-- Exception: URLs, code blocks, and tables may exceed 80 characters
-
-### Code Blocks
-
-- Always specify a language for syntax highlighting (e.g., ```typescript)
-- Use ```text for plain text content like file trees or terminal output
-- Use ```bash for shell commands
-
-### Lists
-
-- Use `-` for unordered lists (not `*`)
-- Use `1.` for ordered lists
-- Indent nested list items with 3 spaces
-- For multi-line list items, indent continuation lines to align with the text
-
-### Other Rules
-
-- No trailing whitespace at end of lines
-- Single blank line at end of file
-- No multiple consecutive blank lines
-- Use ATX-style headings (`#`) not Setext-style (underlines)
+- Blank line after every heading and around code blocks, lists and block
+  quotes. No consecutive blank lines, no trailing whitespace, one newline at
+  end of file.
+- Wrap prose under 80 characters. URLs, code blocks and tables may exceed it.
+- ATX headings (`#`). `-` for unordered lists, `1.` for ordered; nest with 3
+  spaces and align continuation lines with the item text.
+- Every code block names a language: `bash` for shell commands, `text` for
+  file trees and terminal output.
