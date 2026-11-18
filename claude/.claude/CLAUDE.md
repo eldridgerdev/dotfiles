@@ -26,8 +26,6 @@ Applies to every project. A project's own `CLAUDE.md` wins where they differ.
 ## Shell
 
 - My login shell is fish; Bash tool commands run in bash.
-- `rtk` rewrites most shell commands through a hook to shorten their output.
-  If output looks truncated or wrong, re-run it as `rtk proxy <command>`.
 - When I have to run a command myself (for example, a safety restriction),
   first ask whether to open a tmux pane in the current directory, then give
   me the command to run there:
