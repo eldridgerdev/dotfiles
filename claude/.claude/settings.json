@@ -1,58 +1,25 @@
 {
-  "permissions": {
-    "allow": ["Edit", "Write"]
-  },
   "model": "opus",
   "hooks": {
-    "PreToolUse": [
-      {
-        "matcher": "Edit|Write",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "$HOME/.claude/hooks/diff-review.sh",
-            "timeout": 600
-          }
-        ]
-      }
-    ],
-    "Notification": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "say claude needs your input"
-          },
-          {
-            "type": "command",
-            "command": "terminal-notifier -title \"🔔 Claude Code\" -message \"Claude needs your input\""
-          }
-        ]
-      }
-    ],
-    "Stop": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "say claude has completed a task"
-          },
-          {
-            "type": "command",
-            "command": "terminal-notifier -title \"✅ Claude Code\" -message \"The task has been completed\""
-          }
-        ]
-      }
-    ]
+    "PreToolUse": []
   },
   "statusLine": {
     "type": "command",
-    "command": "npx -y ccstatusline@latest",
-    "padding": 0
+    "command": "bash /home/eldridger/.claude/statusline-command.sh"
   },
   "enabledPlugins": {
-    "safety-net@cc-marketplace": true
-  }
+    "llm-docs-optimizer@llm-docs-optimizer-marketplace": true
+  },
+  "extraKnownMarketplaces": {
+    "llm-docs-optimizer-marketplace": {
+      "source": {
+        "source": "github",
+        "repo": "alonw0/llm-docs-optimizer"
+      }
+    }
+  },
+  "effortLevel": "high",
+  "tui": "fullscreen",
+  "skipDangerousModePermissionPrompt": true,
+  "editorMode": "vim"
 }
